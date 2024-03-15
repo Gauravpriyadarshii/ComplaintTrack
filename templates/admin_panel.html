@@ -1,0 +1,38 @@
+<!-- templates/admin_panel.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS styles */
+        .complaint-item {
+            transition: transform 0.2s ease;
+        }
+        .complaint-item:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-8">Admin Panel</h1>
+        <ul>
+            {% for complaint in complaints %}
+                <li class="bg-white shadow-md rounded-lg overflow-hidden mb-4 complaint-item">
+                    <div class="px-6 py-4">
+                        <span class="font-semibold">Token:</span> {{ complaint.token }}, 
+                        <span class="font-semibold">Status:</span> {{ complaint.status }}
+                    </div>
+                    <div class="px-6 py-4 flex justify-end">
+                        <a href="/admin/action/{{ complaint.token }}/approved" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded mr-2">Approve</a>
+                        <a href="/admin/action/{{ complaint.token }}/rejected" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">Reject</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
